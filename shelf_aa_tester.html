@@ -1,0 +1,454 @@
+<html>
+
+<head>
+    <style type="text/css">
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: 0px;
+        }
+        select {
+            width: 250px;
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            max-width: 100%;
+            border: 2px solid #eee;
+        }
+        .level-label {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        .combo-block {
+            margin-bottom: 20px;
+            display: block;
+        }
+        .left-pane {
+            padding: 20px 30px 20px 20px;
+            width: 30vw;
+            background-color: rgb(216, 218, 218);
+            height: 100vh; 
+            display: block;
+        }
+        .right-pane {
+            display: block;
+            width: 70vw;
+            height: 100vh
+        }
+        body {
+            overflow: hidden;
+            margin: 0px;
+            display: block;
+            height: 100vh;Open Sans,serif;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+    </style>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@shelf/agent-assist-sdk@3.5.0/lib/agent-assist.min.js"></script>
+
+    <script>
+        var menuItems = {
+            "options": [{
+                    "options": [{
+                        "options": [],
+                        "value": "How It Works"
+                    }],
+                    "value": "Bonus"
+                },
+                {
+                    "options": [{
+                            "options": [{
+                                    "value": "Monthly Maintenance"
+                                },
+                                {
+                                    "value": "Other"
+                                }
+                            ],
+                            "value": "Boost Issues"
+                        },
+                        {
+                            "options": [{
+                                    "value": "How It Works"
+                                },
+                                {
+                                    "value": "How To Increase"
+                                }
+                            ],
+                            "value": "Boost Limits"
+                        },
+                        {
+                            "options": [],
+                            "value": "How It Works"
+                        },
+                        {
+                            "options": [{
+                                    "value": "Eligibility"
+                                },
+                                {
+                                    "value": "How It Works"
+                                }
+                            ],
+                            "value": "How to Recieve"
+                        },
+                        {
+                            "options": [{
+                                    "value": "Eligibility"
+                                },
+                                {
+                                    "value": "How It Works"
+                                }
+                            ],
+                            "value": "How to Send"
+                        }
+                    ],
+                    "value": "Boosts"
+                },
+                {
+                    "options": [{
+                            options: [{
+
+                                    "value": "Access Error"
+                                },
+                                {
+                                    "value": "Incorrectly Deactivated"
+                                },
+                                {
+                                    "value": "Trial Expired"
+                                }
+                            ],
+                            "value": "Access Issues"
+                        },
+                        {
+                            options: [],
+                            "value": "Decreased Limit Error"
+                        },
+                        {
+                            options: [],
+                            "value": "Summary Error"
+                        },
+                        {
+                            options: [],
+                            "value": "Other"
+                        }
+                    ],
+                    "value": "Feature Issues"
+                },
+                {
+                    "options": [{
+                            "options": [{
+                                    "value": "ACH Transfers"
+                                },
+                                {
+                                    "value": "Chime Checkbook Transactions"
+                                },
+                                {
+                                    "value": "Credit Builder Transactions"
+                                },
+                                {
+                                    "value": "Pay Friend Transfers"
+                                },
+                                {
+                                    "value": "Third Party Transactions"
+                                }
+                            ],
+                            "value": "Extended Coverage"
+                        },
+                        {
+                            "options": [],
+                            "value": "Other"
+                        }
+                    ],
+                    "value": "Feature Request"
+                },
+                {
+                    "options": [{
+                            "options": [],
+                            "value": "Coverage Rules"
+                        },
+                        {
+                            "options": [],
+                            "value": "Eligibility"
+                        },
+                        {
+                            "options": [],
+                            "value": "Feature Overview"
+                        },
+                        {
+                            "options": [],
+                            "value": "Fees"
+                        },
+                        {
+                            "options": [{
+                                    "value": "Check SpotMe Summary"
+                                },
+                                {
+                                    "value": "Enroll"
+                                },
+                                {
+                                    "value": "Pay Back"
+                                },
+                                {
+                                    "value": "Set Overdraft Limit"
+                                },
+                                {
+                                    "value": "Turn Off"
+                                }
+                            ],
+                            "value": "How-To Inquiries"
+                        },
+                        {
+                            "options": [],
+                            "value": "Other"
+                        }
+                    ],
+                    "value": "How It Works"
+                },
+                {
+                    "options": [{
+                            "options": [{
+                                    "value": "Bonus Expired"
+                                },
+                                {
+                                    "value": "Boost Expired"
+                                },
+                                {
+                                    "value": "No Direct Deposit"
+                                },
+                                {
+                                    "value": "Other Reason"
+                                }
+                            ],
+                            "value": "Decreased Limit"
+                        },
+                        {
+                            "options": [],
+                            "value": "How It Works"
+                        },
+                        {
+                            "options": [],
+                            "value": "How To Increase"
+                        }
+                    ],
+                    "value": "Limits"
+                },
+                {
+                    "options": [{
+                            "options": [],
+                            "value": "How It Works"
+                        },
+                        {
+                            "options": [],
+                            "value": "Return Request"
+                        }
+                    ],
+                    "value": "Optional Tips"
+                }
+            ],
+            "value": "SpotMe"
+        }
+    </script>
+    <script>
+        function clearLevel4() {
+            var level4 = document.getElementById('level4');
+            var currentOptions = level4.getElementsByTagName('option')
+
+            if (currentOptions.length > 1) {
+
+                while (currentOptions.length > 1) {
+                    level4.removeChild(currentOptions[1])
+                }
+
+                currentOptions[0].disabled = true;
+                currentOptions[0].selected = true;
+            }
+            level4.disabled = true;
+        }
+
+        function level2Changed() {
+            var level2 = document.getElementById('level2');
+            console.log(`${level2.value} has changed to ${level2.selectedOptions[0].innerText}`)
+
+            const selectedItem = level2.value;
+            const selectedItemText = level2.selectedOptions[0].innerText;
+
+            var level3 = document.getElementById('level3');
+            var currentOptions = level3.getElementsByTagName('option')
+
+            if (currentOptions.length > 1) {
+
+                while (currentOptions.length > 1) {
+                    level3.removeChild(currentOptions[1])
+                }
+
+                currentOptions[0].disabled = true;
+                currentOptions[0].selected = true;
+            }
+
+            clearLevel4();
+
+
+            var options = menuItems['options'][selectedItem]['options']
+            for (var count = 0; count < options.length; count++) {
+                var option = document.createElement('option');
+                option.innerHTML = options[count].value;
+                option.value = count;
+                level3.appendChild(option);
+            }
+            level3.disabled = false;
+            triggerContextSuggstions(2);
+        }
+
+        function level3Changed() {
+            var level2 = document.getElementById('level2');
+            console.log(`${level2.value} has changed to ${level2.selectedOptions[0].innerText}`)
+
+            const level2SelectedItem = level2.value;
+            const level2SelectedItemText = level2.selectedOptions[0].innerText;
+
+            var level3 = document.getElementById('level3');
+            const level3SelectedItem = level3.value;
+            const level3SelectedItemText = level3.selectedOptions[0].innerText;
+
+            clearLevel4();
+
+            var options = menuItems['options'][level2SelectedItem]['options'][level3SelectedItem]['options']
+            for (var count = 0; count < options.length; count++) {
+                var option = document.createElement('option');
+                option.innerHTML = options[count].value;
+                option.value = count;
+                level4.appendChild(option);
+            }
+            if (options.length > 0) {
+                level4.disabled = false;
+            }
+            triggerContextSuggstions(3);
+        }
+
+        function level4Changed() {
+            triggerContextSuggstions(4);
+        }
+
+        function triggerContextSuggstions(level) {
+            var level1Text = document.getElementById('level1').selectedOptions[0].innerText;
+            var level2Text = document.getElementById('level2').selectedOptions[0].innerText;
+            var level3Text = document.getElementById('level3').selectedOptions[0].innerText;
+            var level4Text = document.getElementById('level4').selectedOptions[0].innerText;
+
+            switch (level) {
+                case 1:
+                    shelf.AgentAssist.getContextSuggestions({
+                        level1: level1Text,
+                        level2: "",
+                        level3: "",
+                        level4: ""
+                    })
+                    break;
+                case 2:
+                    shelf.AgentAssist.getContextSuggestions({
+                        level1: level1Text,
+                        level2: level2Text,
+                        level3: "",
+                        level4: ""
+                    })
+                    break;
+                case 3:
+                    shelf.AgentAssist.getContextSuggestions({
+                        level1: level1Text,
+                        level2: level2Text,
+                        level3: level3Text,
+                        level4: ""
+                    })
+                    break;
+                case 4:
+                    shelf.AgentAssist.getContextSuggestions({
+                        level1: level1Text,
+                        level2: level2Text,
+                        level3: level3Text,
+                        level4: level4Text
+                    })
+                    break;
+            }
+        }
+
+
+        document.addEventListener("DOMContentLoaded", async function() {
+
+            var lev2Combo = document.getElementById('level2')
+            for (var count = 0; count < menuItems['options'].length; count++) {
+                var option = document.createElement('option');
+                option.innerHTML = menuItems['options'][count].value;
+                option.value = count;
+                lev2Combo.appendChild(option);
+            }
+
+            lev2Combo.addEventListener('change', level2Changed);
+
+            var lev3Combo = document.getElementById('level3');
+            lev3Combo.addEventListener('change', level3Changed);
+
+            var lev4Combo = document.getElementById('level4');
+            lev4Combo.addEventListener('change', level4Changed);
+
+            config = {
+                configurationId: '01GJV7506X8HEN40FK3RT2F6FW',
+                shelfDomain: 'shelf.io',
+                suggestions: {
+                    enabled: true,
+                },
+                favorites: {
+                    enabled: true,
+                },
+                announcements: {
+                    enabled: true,
+                },
+                gem: {
+                    send: {
+                        enabled: true,
+                    },
+                },
+                telemetry: {
+                    systemLocation: 'browser',
+                    systemName: 'Ring Test App',
+                }
+            }
+            var right = document.getElementById('right')
+            await shelf.AgentAssist.initialize(right, config)
+            triggerContextSuggstions(1);
+        });
+    </script>
+</head>
+
+<body>
+    <div style="display: flex;">
+        <div class="left-pane" id="left">
+            <div class="combo-block">
+                <div class="level-label">Level 1</div>
+                <select id="level1">
+                    <option>SpotMe</option>
+                </select>
+            </div>
+            <div class="combo-block">
+                <div class="level-label">Level 2</div>
+                <select id="level2">
+                    <option disabled selected value>Select an option</option>
+                </select>
+            </div>
+            <div class="combo-block">
+                <div class="level-label">Level 3</div>
+                <select id="level3" disabled>
+                    <option disabled selected value>Select an option</option>
+                </select>
+            </div>
+            <div class="combo-block">
+                <div class="level-label">Level 4</div>
+                <select id="level4" disabled>
+                    <option disabled selected value>Select an option</option>
+                </select>
+            </div>
+        </div>
+        <div class="right-pane" id="right">
+        </div>
+    </div>
+</body>
+
+</html>
